@@ -7,7 +7,6 @@ import urllib.request
 import collections
 import sys
 
-
 def fetch():
     _ZHWIKI_SOURCE_URL = "https://zh.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&uselang=zh&formatversion=2&page="
     _PAGE = "中国大陆网络用语列表"
@@ -15,7 +14,6 @@ def fetch():
     page = urllib.request.urlopen(_ZHWIKI_SOURCE_URL + urllib.parse.quote(_PAGE)).read()
     wikitext = json.loads(page)["parse"]["wikitext"]
     return wikitext
-
 
 def process(wikitext):
     words = collections.OrderedDict()
@@ -52,11 +50,9 @@ def process(wikitext):
 
     return words
 
-
 def print_words(words):
     for word in words:
         print(word)
-
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
