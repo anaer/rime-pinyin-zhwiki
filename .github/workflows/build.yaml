@@ -31,10 +31,8 @@ jobs:
         name: zhwiki
         path: zhwiki.dict.yaml
 
-    - name: Release
-      uses: ncipollo/release-action@v1
+    - name: DeleteWorkflowRuns
+      uses: GitRML/delete-workflow-runs@main
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: "zhwiki.dict.yaml"
-        commit: ${{ github.sha }}
-        tag: ${{ github.ref }}
+        retain_days: 2
+        keep_minimum_runs: 3
