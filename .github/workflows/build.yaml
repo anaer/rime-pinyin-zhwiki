@@ -36,3 +36,4 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: "zhwiki.dict.yaml"
+        tag: ${{ github.ref }}
