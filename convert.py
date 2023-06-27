@@ -11,9 +11,9 @@ import sys
 import opencc
 from pypinyin import lazy_pinyin
 
-# Require at least 3 characters
+# 限制文本长度为3-6
 _MINIMUM_LEN = 3
-_MAXIMUM_LEN = 8
+_MAXIMUM_LEN = 6
 
 _LIST_PAGE_ENDINGS = [
     '列表',
@@ -62,7 +62,7 @@ def is_good_title(title, previous_title=None):
         return False
 
     if previous_title and \
-      len(previous_title) >= 4 and \
+      len(previous_title) >= 3 and \
       title.startswith(previous_title):
         return False
 
