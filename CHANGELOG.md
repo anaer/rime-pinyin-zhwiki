@@ -1,3 +1,7 @@
+## 20230627
+
+1. 限制长度3-6
+
 ## 20230526
 
 1. https://dumps.wikimedia.org/zhwiki/
