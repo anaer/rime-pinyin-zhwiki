@@ -11,8 +11,8 @@ import sys
 import opencc
 from pypinyin import lazy_pinyin
 
-# 限制文本长度为3-6
-_MINIMUM_LEN = 3
+# 限制文本长度为2-6
+_MINIMUM_LEN = 2
 _MAXIMUM_LEN = 6
 
 _LIST_PAGE_ENDINGS = [
