@@ -29,9 +29,6 @@ zhwiki.raw: zhwiki.source
 	./convert.py zhwiki.source > zhwiki.raw.tmp
 	sort -u zhwiki.raw.tmp > zhwiki.raw
 
-zhwiki.dict: zhwiki.raw
-	libime_pinyindict zhwiki.raw zhwiki.dict
-
 zhwiki.dict.yaml: zhwiki.raw
 	echo '---\nname: zhwiki\nversion: "0.1"\nsort: by_weight\n...\n' > zhwiki.dict.yaml
 	cat zhwiki.raw >> zhwiki.dict.yaml
