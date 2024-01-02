@@ -33,6 +33,13 @@ jobs:
         name: zhwiki
         path: zhwiki.dict.yaml
 
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      if: ${{  success() }}
+      with:
+        tag_name: Rrelease-${{ github.ref_name }}
+        文件: zhwiki.dict.yaml
+
     - name: DeleteWorkflowRuns
       uses: anaer/delete-workflow-runs@main
       with:
