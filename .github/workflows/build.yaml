@@ -38,7 +38,7 @@ jobs:
       if: ${{  success() }}
       with:
         tag_name: Rrelease-${{ github.ref_name }}
-        文件: zhwiki.dict.yaml
+        files: zhwiki.dict.yaml
 
     - name: DeleteWorkflowRuns
       uses: anaer/delete-workflow-runs@main
