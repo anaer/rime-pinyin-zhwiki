@@ -36,8 +36,8 @@ _PINYIN_FIXES = {
 
 logging.basicConfig(level=logging.INFO)
 
-def is_all_chinese_numbers(text):
-    pattern = r'^[零一二三四五六七八九十百千万亿]+$'
+def is_chinese_date(text):
+    pattern = r'^[零一二三四五六七八九十百千万亿廿年代月日]+$'
     return bool(re.match(pattern, text))
 
 def is_good_title(title, previous_title=None):
@@ -65,8 +65,8 @@ def is_good_title(title, previous_title=None):
     if title.endswith(tuple(_LIST_PAGE_ENDINGS)):
         return False
 
-    # 如果全部为中文数字 则过滤
-    if is_all_chinese_numbers(title):
+    # 如果全部为中文日期 则过滤
+    if is_chinese_date(title):
         return False
 
     if previous_title and \
