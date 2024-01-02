@@ -11,10 +11,10 @@ on:
 
 permissions:
   actions: write
+  contents: write
 
 jobs:
   build:
-    permissions: write-all
     runs-on: ubuntu-20.04
 
     steps:
@@ -29,24 +29,20 @@ jobs:
     - name: Build
       run: make zhwiki.dict.yaml
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Prerelease
+      uses: softprops/action-gh-release@v1
+      if: ${{  success() }}
       with:
-        tag_name: v1.0.0  # 标签名称
-        release_name: Release v1.0.0  # 发布名称
-        body: |
-          Release Notes for v1.0.0
-        draft: false
+        tag_name: Release-${{ github.ref_name }}
+        files: zhwiki.dict.yaml
         prerelease: false
+        generate_release_notes: false
 
-    - name: Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: zhwiki
-        path: zhwiki.dict.yaml
+    # - name: Artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: zhwiki
+    #     path: zhwiki.dict.yaml
 
     - name: DeleteWorkflowRuns
       uses: anaer/delete-workflow-runs@main
