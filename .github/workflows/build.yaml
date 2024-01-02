@@ -29,11 +29,15 @@ jobs:
     - name: Build
       run: make zhwiki.dict.yaml
 
+    - name: Set version
+      id: set-version
+      run: echo "VERSION=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
+
     - name: Upload Prerelease
       uses: softprops/action-gh-release@v1
       if: ${{  success() }}
       with:
-        tag_name: Release-${{ github.ref_name }}
+        tag_name: Release-${{ env.VERSION }}
         files: zhwiki.dict.yaml
         prerelease: false
         generate_release_notes: false
