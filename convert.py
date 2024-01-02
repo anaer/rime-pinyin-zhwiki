@@ -9,7 +9,7 @@ import re
 import sys
 
 import opencc
-from pypinyin import lazy_pinyin
+from pypinyin import TONE3, lazy_pinyin
 
 # 限制文本长度为2-9
 _MINIMUM_LEN = 2
@@ -89,7 +89,7 @@ def main():
         for line in f:
             title = _TO_SIMPLIFIED_CHINESE.convert(line.strip())
             if is_good_title(title, previous_title):
-                pinyin = [_PINYIN_FIXES.get(item, item) for item in lazy_pinyin(title)]
+                pinyin = [_PINYIN_FIXES.get(item, item) for item in lazy_pinyin(title, style=TONE3)]
                 pinyin = _PINYIN_SEPARATOR.join(pinyin)
                 if pinyin == title:
                     logging.info(
