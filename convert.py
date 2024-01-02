@@ -37,7 +37,7 @@ _PINYIN_FIXES = {
 logging.basicConfig(level=logging.INFO)
 
 def is_all_chinese_numbers(text):
-    pattern = r'^[\u4e00-\u9fa5零一二三四五六七八九十百千万亿]+$'
+    pattern = r'^[零一二三四五六七八九十百千万亿]+$'
     return bool(re.match(pattern, text))
 
 def is_good_title(title, previous_title=None):
