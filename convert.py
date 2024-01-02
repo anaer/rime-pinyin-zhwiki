@@ -36,6 +36,10 @@ _PINYIN_FIXES = {
 
 logging.basicConfig(level=logging.INFO)
 
+def is_all_chinese_numbers(text):
+    pattern = r'^[\u4e00-\u9fa5零一二三四五六七八九十百千万亿]+$'
+    return bool(re.match(pattern, text))
+
 def is_good_title(title, previous_title=None):
     if not _HANZI_RE.match(title):
         return False
@@ -59,6 +63,10 @@ def is_good_title(title, previous_title=None):
 
     # Skip list pages
     if title.endswith(tuple(_LIST_PAGE_ENDINGS)):
+        return False
+
+    # 如果全部为中文数字 则过滤
+    if is_all_chinese_numbers(title):
         return False
 
     if previous_title and \
