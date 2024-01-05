@@ -38,7 +38,9 @@ jobs:
       if: ${{  success() }}
       with:
         tag_name: Release-${{ env.VERSION }}
-        files: zhwiki.dict.yaml
+        files: |
+          zhwiki.dict.yaml
+          web-slang-latest.txt
         prerelease: false
         generate_release_notes: false
 
