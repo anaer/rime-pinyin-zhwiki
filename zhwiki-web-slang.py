@@ -6,6 +6,13 @@ import urllib.parse
 import urllib.request
 import collections
 import sys
+import re
+
+def remove_non_chinese_characters(text):
+    # 使用正则表达式匹配所有中文字符
+    chinese_only = re.findall(r'[\u4e00-\u9fff]+', text)
+    # 连接所有匹配到的中文字符串
+    return ''.join(chinese_only)
 
 def fetch():
     _ZHWIKI_SOURCE_URL = "https://zh.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&uselang=zh&formatversion=2&page="
@@ -21,12 +28,13 @@ def process(wikitext):
     def add_word(word):
         if word.startswith("形容"):
             return
-        for garbage in ("、", "[", "]", "…"):
-            word = word.replace(garbage, "")
+        # for garbage in ("、", "[", "]", "…", "'"):
+        #     word = word.replace(garbage, "")
+        word = remove_non_chinese_characters(word)
         words[word.strip()] = None
 
     def add_words(word):
-        for word_separator in ("、", "/", "|", "，", "。"):
+        for word_separator in ("、", "/", "|", "，", "。", "（", "）", "“", "”", ";"):
             if word_separator in word:
                 for w in word.split(word_separator):
                     # recursively resolve
