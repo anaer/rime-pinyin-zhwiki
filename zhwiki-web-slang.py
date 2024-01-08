@@ -8,12 +8,6 @@ import collections
 import sys
 import re
 
-def remove_non_chinese_characters(text):
-    # 使用正则表达式匹配所有中文字符
-    chinese_only = re.findall(r'[\u4e00-\u9fff]+', text)
-    # 连接所有匹配到的中文字符串
-    return ''.join(chinese_only)
-
 def fetch():
     _ZHWIKI_SOURCE_URL = "https://zh.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&uselang=zh&formatversion=2&page="
     _PAGE = "中国大陆网络用语列表"
@@ -28,33 +22,14 @@ def process(wikitext):
     def add_word(word):
         if word.startswith("形容"):
             return
-        # for garbage in ("、", "[", "]", "…", "'"):
-        #     word = word.replace(garbage, "")
-        word = remove_non_chinese_characters(word)
         words[word.strip()] = None
 
-    def add_words(word):
-        for word_separator in ("、", "/", "|", "，", "。", "（", "）", "“", "”", ";"):
-            if word_separator in word:
-                for w in word.split(word_separator):
-                    # recursively resolve
-                    add_words(w.strip())
-                break
-        else:
-            add_word(word)
-
     for line in wikitext.split("\n"):
-        if line.startswith("*"):
-            # Lists
-            for table_separator in ("：", ":"):
-                if table_separator in line:
-                    word = line.split(table_separator)[0].strip("*").strip()
-                    add_words(word)
-                    break
-        elif line.startswith("|"):
-            # Tables
-            word = line.split("|")[1]
-            add_words(word)
+        pattern = r"\b[\u4e00-\u9fa5]{2,9}\b"
+        matches = re.findall(pattern, line)
+        
+        for match in matches:
+            add_word(match)
 
     return words
 
