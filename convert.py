@@ -11,9 +11,9 @@ import sys
 import opencc
 from pypinyin import TONE3, lazy_pinyin
 
-# 限制文本长度为2-5
+# 限制文本长度
 _MINIMUM_LEN = 2
-_MAXIMUM_LEN = 5
+_MAXIMUM_LEN = 4
 
 _LIST_PAGE_ENDINGS = [
     '列表',
