@@ -43,12 +43,6 @@ jobs:
         prerelease: false
         generate_release_notes: false
 
-    # - name: Artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: zhwiki
-    #     path: zhwiki.dict.yaml
-
     - name: DeleteWorkflowRuns
       uses: anaer/delete-workflow-runs@main
       with:

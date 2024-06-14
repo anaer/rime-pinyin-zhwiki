@@ -34,8 +34,10 @@ def process(wikitext):
     return words
 
 def print_words(words):
-    for word in words:
+    for idx, word in enumerate(words):
         print(word)
+        # if idx > 100:
+            # break
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
