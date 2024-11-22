@@ -14,10 +14,10 @@ $(FILENAME).gz:
 	wget https://dumps.wikimedia.org/zhwiki/$(VERSION)/$(FILENAME).gz --no-check-certificate
 
 $(WEB_SLANG_SOURCE):
-	./zhwiki-web-slang.py --fetch > $(WEB_SLANG_SOURCE)
+	python zhwiki-web-slang.py --fetch > $(WEB_SLANG_SOURCE)
 
 $(WEB_SLANG_FILE): $(WEB_SLANG_SOURCE)
-	./zhwiki-web-slang.py --process $(WEB_SLANG_SOURCE) > $(WEB_SLANG_FILE)
+	python zhwiki-web-slang.py --process $(WEB_SLANG_SOURCE) > $(WEB_SLANG_FILE)
 
 $(FILENAME): $(FILENAME).gz
 	gzip -k -d $(FILENAME).gz
@@ -26,7 +26,7 @@ zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE)
 	cat $(FILENAME) $(WEB_SLANG_FILE) > zhwiki.source
 
 zhwiki.raw: zhwiki.source
-	./convert.py zhwiki.source > zhwiki.raw.tmp
+	python convert.py zhwiki.source > zhwiki.raw.tmp
 	sort -u zhwiki.raw.tmp > zhwiki.raw
 
 zhwiki.dict.yaml: zhwiki.raw
