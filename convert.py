@@ -52,7 +52,7 @@ def is_good_title(title, previous_title=None):
         return False
 
     # 3字词语 过滤姓氏开头
-    if len(title) == 3:
+    if len(title) <= 3:
         if title.startswith(tuple(_LIST_SURNAME)):
             return False
 
