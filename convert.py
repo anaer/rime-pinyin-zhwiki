@@ -57,7 +57,7 @@ def is_good_title(title, previous_title=None):
             return False
 
     # 4字词语 过滤复姓
-    if len(title) == 4:
+    if len(title) <= 4:
         if title.startswith(tuple(_LIST_SURNAME_DOUBLE)):
             return False
 
