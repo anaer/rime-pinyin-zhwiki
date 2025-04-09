@@ -70,7 +70,7 @@ def is_good_title(title, previous_title=None):
         return False
 
     if previous_title and \
-      len(previous_title) >= 3 and \
+      len(previous_title) >= 2 and \
       title.startswith(previous_title):
         return False
 
