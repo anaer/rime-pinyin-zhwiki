@@ -28,7 +28,7 @@ rime_lmdg:
 	cut -f1 cn_dicts/* > rime_lmdg.txt
 
 zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE)
-    cat $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg.txt > zhwiki.source
+	cat $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg.txt > zhwiki.source
 
 zhwiki.raw: zhwiki.source
 	python convert.py zhwiki.source > zhwiki.raw.tmp
