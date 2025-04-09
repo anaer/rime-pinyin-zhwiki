@@ -22,8 +22,14 @@ $(WEB_SLANG_FILE): $(WEB_SLANG_SOURCE)
 $(FILENAME): $(FILENAME).gz
 	gzip -k -d $(FILENAME).gz
 
+rime_lmdg:
+    wget https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/cn_dicts.zip
+    #wget https://cf.ghproxy.cc/https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/cn_dicts.zip
+    unzip cn_dicts.zip
+    cut -f1 cn_dicts/* > rime_lmdg.txt
+
 zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE)
-	cat $(FILENAME) $(WEB_SLANG_FILE) > zhwiki.source
+    cat $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg.txt > zhwiki.source
 
 zhwiki.raw: zhwiki.source
 	python convert.py zhwiki.source > zhwiki.raw.tmp
@@ -34,4 +40,4 @@ zhwiki.dict.yaml: zhwiki.raw
 	cat zhwiki.raw >> zhwiki.dict.yaml
 
 clean:
-	rm -f $(FILENAME) zhwiki.{source,raw,dict,dict.yaml} web-slang.source
+	rm -f $(FILENAME) zhwiki.{source,raw,dict,dict.yaml} web-slang.source rime_lmdg.txt
