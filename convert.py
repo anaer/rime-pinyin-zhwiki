@@ -13,7 +13,7 @@ from pypinyin import TONE3, lazy_pinyin
 
 # 限制文本长度
 _MINIMUM_LEN = 2
-_MAXIMUM_LEN = 9
+_MAXIMUM_LEN = 5
 
 _LIST_PAGE_ENDINGS = [
     '列表',
@@ -70,7 +70,7 @@ def is_good_title(title, previous_title=None):
         return False
 
     if previous_title and \
-      len(previous_title) >= 4 and \
+      len(previous_title) >= 3 and \
       title.startswith(previous_title):
         return False
 
