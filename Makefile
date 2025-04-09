@@ -27,7 +27,7 @@ rime_lmdg:
 	unzip cn_dicts.zip
 	cut -f1 cn_dicts/* > rime_lmdg.txt
 
-zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE)
+zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg
 	cat $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg.txt > zhwiki.source
 
 zhwiki.raw: zhwiki.source
