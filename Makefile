@@ -23,10 +23,9 @@ $(FILENAME): $(FILENAME).gz
 	gzip -k -d $(FILENAME).gz
 
 rime_lmdg:
-    wget https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/cn_dicts.zip
-    #wget https://cf.ghproxy.cc/https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/cn_dicts.zip
-    unzip cn_dicts.zip
-    cut -f1 cn_dicts/* > rime_lmdg.txt
+	wget https://github.com/amzxyz/RIME-LMDG/releases/download/dict-nightly/cn_dicts.zip
+	unzip cn_dicts.zip
+	cut -f1 cn_dicts/* > rime_lmdg.txt
 
 zhwiki.source: $(FILENAME) $(WEB_SLANG_FILE)
     cat $(FILENAME) $(WEB_SLANG_FILE) rime_lmdg.txt > zhwiki.source
